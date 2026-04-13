@@ -1,0 +1,1 @@
+-- Use `npx prisma migrate dev --name init` to generate the full SQL from schema.prisma.
