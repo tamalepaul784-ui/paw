@@ -1,0 +1,118 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Yo Agronomist</title>
+  <link rel="stylesheet" href="styles.css" />
+</head>
+<body>
+  <header class="hero">
+    <div class="hero-inner">
+      <div>
+        <span class="pill">AI-Driven Agronomy</span>
+        <h1>Yo Agronomist</h1>
+        <p class="subtitle">
+          A simple advisory app for farmers in Uganda. Get crop suggestions, planting timing,
+          and agronomic guidance for Western and Northern Uganda.
+        </p>
+      </div>
+      <div class="hero-card">
+        <h3>Preview Version</h3>
+        <p>This version is simplified for fast deployment and trial viewing.</p>
+        <ul>
+          <li>No database</li>
+          <li>No login required</li>
+          <li>Instant advisory demo</li>
+        </ul>
+      </div>
+    </div>
+  </header>
+
+  <main class="container">
+    <section class="card form-card">
+      <h2>Get Advisory</h2>
+      <div class="grid two">
+        <div>
+          <label for="region">Region</label>
+          <select id="region">
+            <option value="Western">Western</option>
+            <option value="Northern">Northern</option>
+          </select>
+        </div>
+        <div>
+          <label for="district">District</label>
+          <select id="district"></select>
+        </div>
+        <div>
+          <label for="crop">Crop</label>
+          <select id="crop">
+            <option value="maize">Maize</option>
+            <option value="beans">Beans</option>
+            <option value="banana">Banana</option>
+            <option value="coffee">Coffee</option>
+            <option value="tomato">Tomato</option>
+          </select>
+        </div>
+        <div>
+          <label for="farmerType">Farmer Type</label>
+          <select id="farmerType">
+            <option value="smallholder">Smallholder</option>
+            <option value="commercial">Commercial</option>
+          </select>
+        </div>
+      </div>
+      <button id="generateBtn">Generate Advice</button>
+    </section>
+
+    <section class="grid stats">
+      <div class="card stat-card">
+        <h3>Supported Regions</h3>
+        <p>Western & Northern Uganda</p>
+      </div>
+      <div class="card stat-card">
+        <h3>Target Users</h3>
+        <p>Smallholder & Commercial Farmers</p>
+      </div>
+      <div class="card stat-card">
+        <h3>Delivery Channels</h3>
+        <p>App, WhatsApp, and SMS concept</p>
+      </div>
+    </section>
+
+    <section class="card results-card">
+      <h2>Advisory Result</h2>
+      <div id="result" class="result-box">
+        Select your district and crop, then click <strong>Generate Advice</strong>.
+      </div>
+    </section>
+
+    <section class="grid two lower-grid">
+      <section class="card">
+        <h2>Example SMS Message</h2>
+        <div id="smsBox" class="sms-box">
+          YO AGRONOMIST: Your planting alert will appear here.
+        </div>
+      </section>
+
+      <section class="card">
+        <h2>About This Demo</h2>
+        <p>
+          This preview is designed to help you quickly show trial users how the app looks.
+          It uses built-in demo recommendations based on region, district, and crop.
+        </p>
+        <p>
+          Later, this can be upgraded to a fully live product with real weather, database,
+          and AI chat integration.
+        </p>
+      </section>
+    </section>
+  </main>
+
+  <footer class="footer">
+    <p>Yo Agronomist • Simple Trial Version</p>
+  </footer>
+
+  <script src="script.js"></script>
+</body>
+</html>
