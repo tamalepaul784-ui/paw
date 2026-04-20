@@ -5,47 +5,66 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Yo Agronomist</title>
   <link rel="stylesheet" href="styles.css" />
+  <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+  <script src="config.js"></script>
 </head>
 <body>
-  <header class="hero">
-    <div class="hero-inner">
+  <div class="container">
+    <header class="hero">
       <div>
-        <span class="pill">AI-Driven Agronomy</span>
+        <span class="pill">AI + Weather + Login</span>
         <h1>Yo Agronomist</h1>
-        <p class="subtitle">
-          A simple advisory app for farmers in Uganda. Get crop suggestions, planting timing,
-          and agronomic guidance for Western and Northern Uganda.
-        </p>
+        <p>Get crop advice, planting timing, and agronomic guidance for Uganda with weather-aware AI responses.</p>
       </div>
       <div class="hero-card">
-        <h3>Preview Version</h3>
-        <p>This version is simplified for fast deployment and trial viewing.</p>
+        <h3>Live features</h3>
         <ul>
-          <li>No database</li>
-          <li>No login required</li>
-          <li>Instant advisory demo</li>
+          <li>Real AI advice</li>
+          <li>Email/password login</li>
+          <li>Live weather via Open-Meteo</li>
+          <li>Deployable on Vercel</li>
         </ul>
       </div>
-    </div>
-  </header>
+    </header>
 
-  <main class="container">
-    <section class="card form-card">
-      <h2>Get Advisory</h2>
-      <div class="grid two">
-        <div>
-          <label for="region">Region</label>
+    <section class="grid two-col">
+      <div class="card">
+        <h2>Account</h2>
+        <div id="authStatus" class="status muted">Not signed in</div>
+        <div class="grid two-col compact">
+          <input id="authEmail" type="email" placeholder="Email" />
+          <input id="authPassword" type="password" placeholder="Password" />
+        </div>
+        <div class="actions">
+          <button id="signUpBtn">Sign up</button>
+          <button id="signInBtn" class="secondary">Sign in</button>
+          <button id="signOutBtn" class="ghost">Sign out</button>
+        </div>
+        <p class="hint">Set your Supabase URL and anon key in <code>config.js</code>.</p>
+      </div>
+
+      <div class="card">
+        <h2>Weather snapshot</h2>
+        <div id="weatherBox" class="weather-box muted">Choose district and load advice to see live weather.</div>
+      </div>
+    </section>
+
+    <section class="card">
+      <h2>Get advisory</h2>
+      <div class="grid form-grid">
+        <label>
+          Region
           <select id="region">
-            <option value="Western">Western</option>
-            <option value="Northern">Northern</option>
+            <option>Western</option>
+            <option>Northern</option>
           </select>
-        </div>
-        <div>
-          <label for="district">District</label>
+        </label>
+        <label>
+          District
           <select id="district"></select>
-        </div>
-        <div>
-          <label for="crop">Crop</label>
+        </label>
+        <label>
+          Crop
           <select id="crop">
             <option value="maize">Maize</option>
             <option value="beans">Beans</option>
@@ -53,65 +72,34 @@
             <option value="coffee">Coffee</option>
             <option value="tomato">Tomato</option>
           </select>
-        </div>
-        <div>
-          <label for="farmerType">Farmer Type</label>
+        </label>
+        <label>
+          Farmer Type
           <select id="farmerType">
-            <option value="smallholder">Smallholder</option>
-            <option value="commercial">Commercial</option>
+            <option>Smallholder</option>
+            <option>Commercial</option>
           </select>
-        </div>
+        </label>
+        <label>
+          Soil Type
+          <input id="soilType" placeholder="Loam" value="Loam" />
+        </label>
+        <label>
+          Farm Size (acres)
+          <input id="farmSize" type="number" min="1" value="3" />
+        </label>
       </div>
-      <button id="generateBtn">Generate Advice</button>
+      <label>
+        Extra question
+        <textarea id="question" rows="4" placeholder="Example: When should I plant maize in Gulu and what are the top pest risks?"></textarea>
+      </label>
+      <div class="actions">
+        <button id="adviceBtn">Generate AI Advice</button>
+      </div>
+      <div id="messageBox" class="status muted">Ready.</div>
+      <article id="adviceOutput" class="output"></article>
     </section>
-
-    <section class="grid stats">
-      <div class="card stat-card">
-        <h3>Supported Regions</h3>
-        <p>Western & Northern Uganda</p>
-      </div>
-      <div class="card stat-card">
-        <h3>Target Users</h3>
-        <p>Smallholder & Commercial Farmers</p>
-      </div>
-      <div class="card stat-card">
-        <h3>Delivery Channels</h3>
-        <p>App, WhatsApp, and SMS concept</p>
-      </div>
-    </section>
-
-    <section class="card results-card">
-      <h2>Advisory Result</h2>
-      <div id="result" class="result-box">
-        Select your district and crop, then click <strong>Generate Advice</strong>.
-      </div>
-    </section>
-
-    <section class="grid two lower-grid">
-      <section class="card">
-        <h2>Example SMS Message</h2>
-        <div id="smsBox" class="sms-box">
-          YO AGRONOMIST: Your planting alert will appear here.
-        </div>
-      </section>
-
-      <section class="card">
-        <h2>About This Demo</h2>
-        <p>
-          This preview is designed to help you quickly show trial users how the app looks.
-          It uses built-in demo recommendations based on region, district, and crop.
-        </p>
-        <p>
-          Later, this can be upgraded to a fully live product with real weather, database,
-          and AI chat integration.
-        </p>
-      </section>
-    </section>
-  </main>
-
-  <footer class="footer">
-    <p>Yo Agronomist • Simple Trial Version</p>
-  </footer>
+  </div>
 
   <script src="script.js"></script>
 </body>
