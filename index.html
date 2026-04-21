@@ -1,0 +1,81 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Yo Agronomist</title>
+  <link rel="stylesheet" href="styles.css" />
+</head>
+<body>
+  <header class="hero">
+    <div class="topbar">
+      <span class="badge">AI-Driven Agronomy</span>
+      <div class="auth-buttons">
+        <button id="loginBtn" class="ghost">Log In</button>
+        <button id="signupBtn" class="ghost">Sign Up</button>
+      </div>
+    </div>
+    <div class="hero-grid">
+      <div>
+        <h1>Yo Agronomist</h1>
+        <p>A smarter farmer advisory demo for Uganda with districts, weather context, and practical agronomy guidance.</p>
+        <div class="cta-row">
+          <button id="demoBtn" class="primary">Ask for Demo</button>
+          <a href="#tool" class="secondary">Try the Advisory Tool</a>
+        </div>
+      </div>
+      <div class="card light">
+        <h3>Demo Features</h3>
+        <ul>
+          <li>District selector now works</li>
+          <li>Buttons are active</li>
+          <li>Local weather-by-district layer</li>
+          <li>AI-style agronomy recommendations</li>
+        </ul>
+      </div>
+    </div>
+  </header>
+
+  <main class="container">
+    <section id="tool" class="card form-card">
+      <h2>Get Advisory</h2>
+      <div class="grid2">
+        <label>Region
+          <select id="regionSelect"></select>
+        </label>
+        <label>District
+          <select id="districtSelect"></select>
+        </label>
+        <label>Crop
+          <select id="cropSelect">
+            <option>Maize</option>
+            <option>Beans</option>
+            <option>Banana</option>
+            <option>Coffee</option>
+            <option>Tomato</option>
+          </select>
+        </label>
+        <label>Farmer Type
+          <select id="farmerTypeSelect">
+            <option>Smallholder</option>
+            <option>Commercial</option>
+          </select>
+        </label>
+      </div>
+      <button id="generateBtn" class="primary full">Generate Advice</button>
+      <div id="weatherBox" class="info-box"></div>
+      <div id="resultBox" class="result-box">Choose your district and crop, then click Generate Advice.</div>
+    </section>
+  </main>
+
+  <div id="modal" class="modal hidden">
+    <div class="modal-card">
+      <button id="closeModal" class="close">×</button>
+      <h3 id="modalTitle"></h3>
+      <div id="modalBody"></div>
+    </div>
+  </div>
+
+  <script src="script.js"></script>
+</body>
+</html>
