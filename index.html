@@ -5,66 +5,78 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Yo Agronomist</title>
   <link rel="stylesheet" href="styles.css" />
-  <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
-  <script src="config.js"></script>
 </head>
 <body>
-  <div class="container">
-    <header class="hero">
-      <div>
-        <span class="pill">AI + Weather + Login</span>
-        <h1>Yo Agronomist</h1>
-        <p>Get crop advice, planting timing, and agronomic guidance for Uganda with weather-aware AI responses.</p>
+  <header class="hero">
+    <div class="hero-top">
+      <span class="badge">AI-Driven Agronomy</span>
+      <div class="hero-actions">
+        <button class="ghost-btn" id="loginBtn">Log In</button>
+        <button class="primary-btn" id="signupBtn">Sign Up</button>
       </div>
-      <div class="hero-card">
-        <h3>Live features</h3>
+    </div>
+    <div class="hero-grid">
+      <div>
+        <h1>Yo Agronomist</h1>
+        <p>
+          A smarter farmer advisory demo for Uganda. Get crop guidance, planting timing,
+          weather-informed recommendations, and practical agronomy advice for Western and Northern Uganda.
+        </p>
+        <div class="cta-row">
+          <button class="primary-btn" id="heroDemoBtn">Ask for Demo</button>
+          <button class="secondary-btn" id="scrollBtn">Try the Advisory Tool</button>
+        </div>
+      </div>
+      <div class="preview-card">
+        <h3>Demo Features</h3>
         <ul>
-          <li>Real AI advice</li>
-          <li>Email/password login</li>
-          <li>Live weather via Open-Meteo</li>
-          <li>Deployable on Vercel</li>
+          <li>Local weather data layer by district</li>
+          <li>Log In and Sign Up buttons</li>
+          <li>Ask for Demo request form</li>
+          <li>AI-style agronomy recommendations</li>
         </ul>
       </div>
-    </header>
+    </div>
+  </header>
 
-    <section class="grid two-col">
-      <div class="card">
-        <h2>Account</h2>
-        <div id="authStatus" class="status muted">Not signed in</div>
-        <div class="grid two-col compact">
-          <input id="authEmail" type="email" placeholder="Email" />
-          <input id="authPassword" type="password" placeholder="Password" />
-        </div>
-        <div class="actions">
-          <button id="signUpBtn">Sign up</button>
-          <button id="signInBtn" class="secondary">Sign in</button>
-          <button id="signOutBtn" class="ghost">Sign out</button>
-        </div>
-        <p class="hint">Set your Supabase URL and anon key in <code>config.js</code>.</p>
+  <main class="container">
+    <section class="stats-grid">
+      <div class="stat-card">
+        <h4>Supported Regions</h4>
+        <p>Western & Northern Uganda</p>
       </div>
-
-      <div class="card">
-        <h2>Weather snapshot</h2>
-        <div id="weatherBox" class="weather-box muted">Choose district and load advice to see live weather.</div>
+      <div class="stat-card">
+        <h4>Target Users</h4>
+        <p>Smallholder & Commercial Farmers</p>
+      </div>
+      <div class="stat-card">
+        <h4>Channels</h4>
+        <p>App, WhatsApp, and SMS concept</p>
       </div>
     </section>
 
-    <section class="card">
-      <h2>Get advisory</h2>
-      <div class="grid form-grid">
-        <label>
-          Region
+    <section class="panel" id="advisorySection">
+      <div class="panel-header">
+        <h2>Get Advisory</h2>
+        <p>Select your farm context to receive guidance.</p>
+      </div>
+
+      <div class="form-grid">
+        <div>
+          <label for="region">Region</label>
           <select id="region">
-            <option>Western</option>
-            <option>Northern</option>
+            <option value="Western">Western</option>
+            <option value="Northern">Northern</option>
           </select>
-        </label>
-        <label>
-          District
+        </div>
+
+        <div>
+          <label for="district">District</label>
           <select id="district"></select>
-        </label>
-        <label>
-          Crop
+        </div>
+
+        <div>
+          <label for="crop">Crop</label>
           <select id="crop">
             <option value="maize">Maize</option>
             <option value="beans">Beans</option>
@@ -72,33 +84,87 @@
             <option value="coffee">Coffee</option>
             <option value="tomato">Tomato</option>
           </select>
-        </label>
-        <label>
-          Farmer Type
+        </div>
+
+        <div>
+          <label for="farmerType">Farmer Type</label>
           <select id="farmerType">
-            <option>Smallholder</option>
-            <option>Commercial</option>
+            <option value="Smallholder">Smallholder</option>
+            <option value="Commercial">Commercial</option>
           </select>
-        </label>
-        <label>
-          Soil Type
-          <input id="soilType" placeholder="Loam" value="Loam" />
-        </label>
-        <label>
-          Farm Size (acres)
-          <input id="farmSize" type="number" min="1" value="3" />
-        </label>
+        </div>
       </div>
-      <label>
-        Extra question
-        <textarea id="question" rows="4" placeholder="Example: When should I plant maize in Gulu and what are the top pest risks?"></textarea>
-      </label>
-      <div class="actions">
-        <button id="adviceBtn">Generate AI Advice</button>
+
+      <button class="generate-btn" id="generateBtn">Generate Advice</button>
+
+      <div class="results-grid">
+        <div class="result-box">
+          <h3>Weather Database Snapshot</h3>
+          <div id="weatherOutput" class="result-content muted">Choose a district and generate advice.</div>
+        </div>
+        <div class="result-box">
+          <h3>Agronomy Advice</h3>
+          <div id="adviceOutput" class="result-content muted">Your advisory response will appear here.</div>
+        </div>
       </div>
-      <div id="messageBox" class="status muted">Ready.</div>
-      <article id="adviceOutput" class="output"></article>
     </section>
+
+    <section class="panel">
+      <div class="panel-header">
+        <h2>Demo Request</h2>
+        <p>Use this form to simulate onboarding a pilot user or partner.</p>
+      </div>
+      <form id="demoForm" class="form-grid">
+        <div>
+          <label for="demoName">Full Name</label>
+          <input id="demoName" type="text" placeholder="Your name" required />
+        </div>
+        <div>
+          <label for="demoEmail">Email</label>
+          <input id="demoEmail" type="email" placeholder="you@example.com" required />
+        </div>
+        <div>
+          <label for="demoOrg">Organisation</label>
+          <input id="demoOrg" type="text" placeholder="Farm, company, or NGO" />
+        </div>
+        <div>
+          <label for="demoInterest">Interest</label>
+          <select id="demoInterest">
+            <option value="Trial access">Trial access</option>
+            <option value="Commercial pilot">Commercial pilot</option>
+            <option value="Partnership">Partnership</option>
+          </select>
+        </div>
+        <div class="full-width">
+          <label for="demoMessage">Message</label>
+          <textarea id="demoMessage" rows="4" placeholder="Tell us what kind of demo you want."></textarea>
+        </div>
+        <div class="full-width">
+          <button type="submit" class="primary-btn">Ask for Demo</button>
+        </div>
+      </form>
+      <div id="demoResponse" class="success-message hidden"></div>
+    </section>
+  </main>
+
+  <div class="modal hidden" id="authModal">
+    <div class="modal-card">
+      <button class="close-btn" id="closeModal">×</button>
+      <h2 id="modalTitle">Log In</h2>
+      <form id="authForm">
+        <label for="authName" id="authNameLabel" class="hidden">Full Name</label>
+        <input id="authName" class="hidden" type="text" placeholder="Your full name" />
+
+        <label for="authEmail">Email</label>
+        <input id="authEmail" type="email" placeholder="you@example.com" required />
+
+        <label for="authPassword">Password</label>
+        <input id="authPassword" type="password" placeholder="Enter password" required />
+
+        <button type="submit" class="primary-btn modal-submit" id="authSubmitBtn">Log In</button>
+      </form>
+      <p id="authMessage" class="success-message hidden"></p>
+    </div>
   </div>
 
   <script src="script.js"></script>
